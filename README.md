@@ -21,7 +21,7 @@ Create a `start.sh` file, starting from `start-example.sh`:
 ```
 $ cp start-example.sh start.sh 
 $ chmod +x start.sh 
-``` 
+```
 
 Open the file `start.sh` and assign the right values to the variables.
 
