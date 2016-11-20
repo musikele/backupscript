@@ -1,9 +1,9 @@
 SOURCE=~
-DEST_DIRECTORY=user@server
+DEST_DIRECTORY=backup_user
 EXCLUDE_FILE=./exclude.cfg
-SSH_SERVER='server.com'
-SSH_USER="admin"
-SSH_OPTIONS='ssh user@server'
+SSH_SERVER='your.server.com'
+SSH_USER="user"
+SSH_OPTIONS='-p 1234'
 
 ./Backup-0.1.sh \ 
 "$SOURCE" \
