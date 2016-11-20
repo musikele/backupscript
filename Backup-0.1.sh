@@ -1,37 +1,44 @@
 #!/bin/bash
 clear 
 #This program will try to backup the whole directory to external disk
-# $1 = dir to copy
-# $2 = destination dir 
-# $3 = exclude file (TODO: set default)
-# $4 = ssh command to connect on the remote server 
 
 # cancello eventuali log antichi 
 rm ./*.log
+
+SOURCE=$1
+DEST_DIRECTORY=$2
+EXCLUDE_FILE=$3
+SSH_SERVER=$4
+SSH_USER=$5
+SSH_OPTIONS=$6
+
+SSH_REMOTE_SERVER="$5@$4"
+SSH="ssh $6 $SSH_REMOTE_SERVER"
+SSH_DEST_DIRECTORY=""
 
 #step 1 - check that the external disk is connected
 echo "Source Directory: $1"
 echo "Destination Directory: $2"
 echo "Exclude File: $3"
-echo "SSH command: $4"
+echo "SSH command: $SSH"
 
-# memorizzo la stringa di connessione a ssh e verifico che sia in funzione 
-SSH="$4" 
+# memorizzo la stringa di connessione a ssh e verifico che sia in funzione  
 
-if ($SSH '[ ! -d $2 ]'); then
-    echo "Sorry, there is no directory at $2."
+if ($SSH '[ ! -d $SSH_REMOTE_SERVER ]'); then
+    
+		echo "Sorry, there is no directory at $SSH_REMOTE_SERVER."
     exit 
 fi
 
-DIR="backup_rsync/backup"
-BACKUPDIR=$2:$DIR
+DIR="$2/backup"
+BACKUPDIR="$SSH_REMOTE_SERVER:$DIR"
 echo "BACKUPDIR: $BACKUPDIR"
 
 #step 2 - if the directory exists, check if the "backup" directory exists
 if ($SSH '[ ! -d $BACKUPDIR ]'); then 
     echo "$BACKUPDIR directory does not exist. Creating." 
     mkdir $BACKUPDIR
-fi 
+fi
 
 #step 3 - get the latest backup dir 
 LATEST=$($SSH 'ls' '-I' '@eaDir' '-r' $DIR '|' 'head' '-n1')
