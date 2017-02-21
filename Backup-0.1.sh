@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -x
+
 clear 
 #This program will try to backup the whole directory to external disk
 
@@ -17,6 +20,8 @@ SSH_OPTIONS=$6
 SSH_REMOTE_SERVER="$5@$4"
 SSH="ssh $6 $SSH_REMOTE_SERVER"
 SSH_DEST_DIRECTORY=""
+
+PWD=$(pwd)
 
 #step 1 - check that the external disk is connected
 echo "Source Directory: $1"

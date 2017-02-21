@@ -1,4 +1,4 @@
-sudo cp com.michelenasti.scripts.backupscript.plist /Library/LaunchDaemons
+cp com.michelenasti.scripts.backupscript.plist ~/Library/LaunchAgents
 
-launchctl load -w /Library/LaunchDaemons/com.michelenasti.scripts.backupscript.plist
-launchctl list
+launchctl load -w ~/Library/LaunchAgents/com.michelenasti.scripts.backupscript.plist
+launchctl list | grep michelenasti

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 SOURCE=~
 DEST_DIRECTORY=backup_user
 EXCLUDE_FILE=./exclude.cfg
