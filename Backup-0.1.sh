@@ -2,6 +2,8 @@
 clear 
 #This program will try to backup the whole directory to external disk
 
+osascript -e 'display notification "A backup is about to start..." with title "Backup"'
+
 # cancello eventuali log antichi 
 rm ./*.log
 
