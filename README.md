@@ -15,6 +15,16 @@ This script works even when you are not in your home network!
 
 Don't forget to configure the server to accept ssh connections from your computer without password! The web is full of articles on how to do this, [here's one](http://www.linuxproblem.org/art_9.html). 
 
+# Install 
+
+1. edit file `com.michelenasti.scripts.backupscript.plist` 
+2. set the paths with your directories 
+3. launch ./install-mac.sh 
+
+# Uninstall 
+
+just `./uninstall-mac.sh`
+
 # How to launch?
 
 Create a `start.sh` file, starting from `start-example.sh`:  
