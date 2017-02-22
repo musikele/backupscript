@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -x
-
 clear 
 #This program will try to backup the whole directory to external disk
+
+set -x
 
 osascript -e 'display notification "A backup is about to start..." with title "Backup"'
 
@@ -22,6 +22,8 @@ SSH="ssh $6 $SSH_REMOTE_SERVER"
 SSH_DEST_DIRECTORY=""
 
 PWD=$(pwd)
+ID=$(id)
+echo "$ID is running this script from $PWD"
 
 #step 1 - check that the external disk is connected
 echo "Source Directory: $1"
@@ -62,7 +64,8 @@ COMPLETE_LINK_DEST_DIR="../$LATEST"
 
 echo "linking old $COMPLETE_LINK_DEST_DIR to $TARGET..."
 
-/usr/local/bin/rsync -av --numeric-ids --progress --delete -e "ssh -p 2222" --exclude-from="$EXCLUDE_FILE" --link-dest="$COMPLETE_LINK_DEST_DIR" $1 $TARGET | tee $HOME/Tools/Scripts/BackupScript/backup$DATE.log
+/usr/local/bin/rsync -av --numeric-ids --progress --delete -e "ssh -p 2222" --exclude-from="$EXCLUDE_FILE" --link-dest="$COMPLETE_LINK_DEST_DIR" $1 $TARGET 
+| tee $HOME/Tools/Scripts/BackupScript/backup$DATE.log
 
 echo "Fatto."
 exit
