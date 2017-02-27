@@ -26,11 +26,18 @@ SSH_DEST_DIRECTORY=""
 
 
 
-#step 1 - check that the external disk is connected
+#step 1 - check that the external disk is connected & network is available
 echo "Source Directory: $1"
 echo "Destination Directory: $2"
 echo "Exclude File: $3"
 echo "SSH command: $SSH"
+
+wget -q --tries=10 --timeout=20 --spider http://google.com
+if [[ $? -eq 0 ]]; then
+        echo "Online"
+else
+        exit
+fi
 
 # memorizzo la stringa di connessione a ssh e verifico che sia in funzione  
 
