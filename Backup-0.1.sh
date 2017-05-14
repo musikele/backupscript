@@ -1,8 +1,6 @@
 #!/bin/bash
 #This program will try to backup the whole directory to external disk
 
-set -x
-
 # check network 
 curl --silent --head http://www.google.com/  |egrep "20[0-9] Found|30[0-9] Found" >/dev/null
 if [[ $? -eq 0 ]]; then
