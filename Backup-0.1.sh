@@ -69,7 +69,7 @@ COMPLETE_LINK_DEST_DIR="../$LATEST"
 
 echo "linking old $COMPLETE_LINK_DEST_DIR to $TARGET..."
 
-/usr/local/bin/rsync -av --numeric-ids --progress --delete -e "ssh -p 2222" --exclude-from="$EXCLUDE_FILE" --link-dest="$COMPLETE_LINK_DEST_DIR" $1 $TARGET 
+/usr/local/bin/rsync --bwlimit=25 -av --numeric-ids --progress --delete -e "ssh -p 2222" --exclude-from="$EXCLUDE_FILE" --link-dest="$COMPLETE_LINK_DEST_DIR" $1 $TARGET 
 
 #| tee $HOME/Tools/Scripts/BackupScript/backup$DATE.log
 
