@@ -3,10 +3,9 @@
 
 # check network 
 curl --silent --head http://www.google.com/  |egrep "20[0-9] Found|30[0-9] Found" >/dev/null
-if [[ $? -eq 0 ]]; then
-	osascript -e 'display notification "A backup is about to start..." with title "Backup"'
-else
-	osascript -e 'display notification "Could not start Backup." with title "Backup"'
+if [[ ! $? -eq 0 ]]; then
+	echo "no internet connection."
+    exit
 fi
 
 PWD=$(pwd)
@@ -67,7 +66,7 @@ COMPLETE_LINK_DEST_DIR="../$LATEST"
 
 echo "linking old $COMPLETE_LINK_DEST_DIR to $TARGET..."
 
-/usr/local/bin/rsync --bwlimit=25 -av --numeric-ids --progress --delete -e "ssh -p 2222" --exclude-from="$EXCLUDE_FILE" --link-dest="$COMPLETE_LINK_DEST_DIR" $1 $TARGET 
+rsync --bwlimit=100 -avL --numeric-ids --progress --delete -e "ssh -p 2222" --exclude-from="$EXCLUDE_FILE" --link-dest="$COMPLETE_LINK_DEST_DIR" $1 $TARGET 
 
 #| tee $HOME/Tools/Scripts/BackupScript/backup$DATE.log
 
